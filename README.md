@@ -17,7 +17,7 @@ This is the backend API for the EnviroCore sustainability dashboard — a soluti
 
 These endpoints support the frontend dashboard functionality:
 
-Method      Endpointb         Description
+Method      Endpoint         Description
 POST /building
 Add a building
 Adds a new building with usage inputs
@@ -72,8 +72,8 @@ and returns this value along with building details.
 
 🌐 Deployment
 
-This backend is deployed to Google Cloud Run.
-It scales automatically and exposes a secure endpoint for the frontend to consume.
+This backend is deployed to Google Cloud Run (via Render).
+It scales automatically and exposes a public endpoint for the frontend.
 
 Example deployed URL (change as per your actual deployment):
 https://envirocore-backend.onrender.com
