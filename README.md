@@ -1,99 +1,116 @@
-🌱 EnviroCore — Campus Carbon Footprint Dashboard
+📦 EnviroCore Backend
 
-EnviroCore is a web-based sustainability dashboard designed to help educational institutions monitor, visualize, and reduce their carbon footprint at the building level. It enables campuses to track electricity, water, and paper usage and receive actionable recommendations to lower emissions.
-
-⸻
-
-🚀 Features
-	•	🔐 Firebase Authentication (Login / Signup)
-	•	🏢 Add and manage multiple campus buildings
-	•	⚡ Track electricity (kWh), water (liters), and paper (kg)
-	•	📊 Visualize emissions using bar and pie charts
-	•	♻ Smart sustainability recommendations:
-	•	Switch to LED lighting
-	•	Install sensor-based water taps
-	•	Reduce paper usage via digital alternatives
-	•	📉 Shows potential savings and future waste impact
-	•	📄 Export reports as PDF and Excel
-	•	🌙 Dark mode support
+This is the backend API for the EnviroCore sustainability dashboard — a solution designed to help educational campuses monitor and reduce their carbon footprint. The backend handles resource data storage, carbon emission calculations, and recommendation logic.
 
 ⸻
 
 🛠 Tech Stack
-
-Frontend
-	•	HTML, CSS, JavaScript
-	•	Chart.js (for data visualization)
-	•	jsPDF (PDF export)
-	•	SheetJS (Excel export)
-
-Backend
-	•	Node.js + Express (REST API)
-	•	Hosted on Google Cloud Run
-
-Authentication & Hosting
-	•	Firebase Authentication
-	•	Firebase Hosting (frontend)
+	•	Node.js — JavaScript runtime
+	•	Express.js — Web framework for REST APIs
+	•	Google Cloud Run — Serverless hosting for the API
+	•	REST API — JSON based endpoints
+	•	CORS — Cross-origin support
 
 ⸻
 
-📊 Emission Calculation Logic
-Resource            Factor Used
-Electricity         0.5 kg CO₂ per kWh
-Water               0.002 kg CO₂ per liter
-Paper               1.5 kg CO₂ per kg
+📡 API Overview
+
+These endpoints support the frontend dashboard functionality:
+
+Method      Endpointb         Description
+POST /building
+Add a building
+Adds a new building with usage inputs
+
+GET /buildings?uid=…
+Get buildings
+Fetches all buildings for a specific user
+
+DELETE /buildings?uid=…
+Clear buildings
+Deletes all buildings for a user
 
 ⸻
 
-Savings estimation:
-	•	LED lighting → ~20% electricity savings
-	•	Sensor taps → ~30% water savings
-	•	Digital documents → ~40% paper savings
+📊 Carbon Emission Logic
+
+For each building, emissions are calculated using:
+
+Resource
+Factor
+Notes
+Electricity
+0.5 kg CO₂ / kWh
+Standard average grid emission factor
+Water
+0.002 kg CO₂ / liter
+Includes pumping and treatment footprint
+Paper
+1.5 kg CO₂ / kg
+Typical lifecycle footprint
+
+The backend computes :
+
+carbon = (electricity_kwh * 0.5) + (water_litres * 0.002) + (paper_kg * 1.5)
+and returns this value along with building details.
 
 ⸻
 
-🌍 Use Case
+🚀 Installation
+1.	Clone repository:
+	git clone https://github.com/ajaysharma111/envirocore-backend
 
-EnviroCore is designed for:
-	•	Colleges and universities
-	•	Smart campuses
-	•	Sustainability initiatives
-	•	Awareness and decision-support systems
+2.	Install dependencies:
+    npm install
 
-It helps institutions understand where emissions come from, what actions reduce them, and what happens if no action is taken.
+3.  Run locally:
+    node index.js
 
-⸻
-
-📈 Example Workflow
-	1.	Login or Sign up
-	2.	Add buildings with usage data
-	3.	View emissions in charts
-	4.	Read smart recommendations
-	5.	Export sustainability reports
+	The API will run at http://localhost:3000.
 
 ⸻
 
-🎯 Purpose
+🌐 Deployment
 
-The goal of EnviroCore is not perfect scientific modeling but:
-	•	Awareness
-	•	Actionability
-	•	Simplicity
-	•	Educational impact
+This backend is deployed to Google Cloud Run.
+It scales automatically and exposes a secure endpoint for the frontend to consume.
 
-It encourages institutions to make informed sustainability decisions using data.
+Example deployed URL (change as per your actual deployment):
+https://envirocore-backend.onrender.com
 
 ⸻
 
-🔮 Future Scope
-	•	IoT sensor integration for automatic data input
-	•	AI-based predictive emissions forecasting
-	•	Mobile app version
-	•	Multi-campus benchmarking
-	•	Government sustainability reporting integration
+🔐 Authentication
+
+User authentication (login/signup) is handled on the frontend using Firebase Authentication.
+The backend trusts the uid passed from the frontend to identify users and associate building data.
 
 ⸻
 
-🏁 License
+🔄 How It Works With Frontend
+	1.	Frontend calls POST /building with:
+	•	building name
+	•	electricity, water, paper usage
+	•	user ID (from Firebase Auth)
+	2.	Backend calculates carbon footprint
+	3.	Frontend fetches:
+	•	List of buildings (GET /buildings?uid=…)
+	•	Displays data in charts
+	•	Shows recommendations
+envirocore-backend/
+├── index.js
+├── package.json
+├── package-lock.json
+└── README.md
+🤝 Contributing
+
+Feel free to open issues or pull requests.
+This project is built for hackathons and educational use — all contributions are welcome.
+
+⸻
+
+📝 License
 
 This project is for educational and hackathon purposes.
+Feel free to study, modify, and build on top of it.
+	
